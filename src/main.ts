@@ -2,6 +2,7 @@ import connectLivereload from 'connect-livereload';
 import dotenv from 'dotenv';
 import express from 'express';
 import livereload from 'livereload';
+import gameController from './controllers/game/game.controller';
 
 dotenv.config();
 
@@ -27,14 +28,14 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 app.get('/', (_, res) => {
-  res.send('Hello World!');
-});
-
-app.get('/index', (_, res) => {
   res.render('index', {
-    title: 'Hello World!',
+    title: 'Footbal Game',
+    header: 'Football Game',
+    body: ''
   });
 });
+
+app.use('/game', gameController);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {

@@ -1,0 +1,404 @@
+<style type="text/css">
+  .game-board-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .game-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .game-page h2 {
+    text-align: center;
+    font-size: 30px;
+    /** remove extra margin */
+    margin: 0;
+  }
+
+  .playground {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 40px 0;
+  }
+
+  .team {
+    margin: 0 40px;
+  }
+
+  .team h3 {
+    text-align: center;
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+
+  .players {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  /* player style: square with a bit rounded, name: center, score: bottom right */
+  .player {
+    width: 100px;
+    height: 100px;
+    border: 1px solid #ccc;
+    border-radius: 10%;
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+
+  .player:hover {
+    /* add shadow when hover */
+    box-shadow: 0 0 10px #ccc;
+    /* scale up a bit when hover */
+    transform: scale(1.1);
+    cursor: default;
+    /* remove selection */
+    user-select: none;
+  }
+
+  .player__name {
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .player__name::before {
+    /* emoji player */
+    content: '\1F3C3 ';
+  }
+
+  .player__score {
+    font-size: 16px;
+    font-weight: bold;
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+  }
+
+  .player__score::after {
+    /* emoji goal */
+    content: '\26BD ';
+    /* smaller */
+    font-size: 12px;
+  }
+
+  .home>.players>.player {
+    background-color: red;
+    color: white;
+  }
+
+  .home>h3 {
+    color: red;
+  }
+
+  .away>.players>.player {
+    background-color: #1e90ff;
+    color: #fff;
+  }
+
+  .away>h3 {
+    color: #1e90ff;
+  }
+
+  /* right side board events, scrollable with fixed height */
+  .board-events {
+    height: 450px;
+    overflow-y: scroll;
+    width: 400px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+  }
+
+  .board-event {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    /* remove cursor */
+    cursor: default;
+  }
+
+  .board-event:hover {
+    background-color: #ccc;
+  }
+
+  .board-event__title {
+    /* left aligned */
+    font-weight: bold;
+    font-size: 16px;
+  }
+
+  .board-event__description {
+    font-size: 14px;
+  }
+</style>
+
+<div class="game-board-container">
+  <div class="game-page">
+    <h2>Football Game</h2>
+    <div class="playground">
+      <div class="team home">
+        <h3>Home Team</h3>
+        <div class="players">
+          <div class="player">
+            <div class="player__name">
+              Player 1
+            </div>
+            <div class="player__score">
+              0
+            </div>
+          </div>
+          <div class="player">
+            <div class="player__name">
+              Player 2
+            </div>
+            <div class="player__score">
+              2
+            </div>
+          </div>
+          <div class="player">
+            <div class="player__name">
+              Player 3
+            </div>
+            <div class="player__score">
+              0
+            </div>
+          </div>
+          <div class="player">
+            <div class="player__name">
+              Player 4
+            </div>
+            <div class="player__score">
+              0
+            </div>
+          </div>
+          <div class="player">
+            <div class="player__name">
+              Player 5
+            </div>
+            <div class="player__score">
+              0
+            </div>
+          </div>
+          <div class="player">
+            <div class="player__name">
+              Player 6
+            </div>
+            <div class="player__score">
+              0
+            </div>
+          </div>
+          <div class="player">
+            <div class="player__name">
+              Player 7
+            </div>
+            <div class="player__score">
+              0
+            </div>
+          </div>
+          <div class="player">
+            <div class="player__name">
+              Player 8
+            </div>
+            <div class="player__score">
+              0
+            </div>
+          </div>
+          <div class="player">
+            <div class="player__name">
+              Player 9
+            </div>
+            <div class="player__score">
+              0
+            </div>
+          </div>
+          <div class="player">
+            <div class="player__name">
+              Player 10
+            </div>
+            <div class="player__score">
+              0
+            </div>
+          </div>
+          <div class="player">
+            <div class="player__name">
+              Player 11
+            </div>
+            <div class="player__score">
+              0
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="team away">
+        <h3>Away Team</h3>
+        <div class="players">
+          <div class="player">
+            <div class="player__name">
+              Player 1
+            </div>
+            <div class="player__score">
+              0
+            </div>
+          </div>
+          <div class="player">
+            <div class="player__name">
+              Player 2
+            </div>
+            <div class="player__score">
+              0
+            </div>
+          </div>
+          <div class="player">
+            <div class="player__name">
+              Player 3
+            </div>
+            <div class="player__score">
+              0
+            </div>
+          </div>
+          <div class="player">
+            <div class="player__name">
+              Player 4
+            </div>
+            <div class="player__score">
+              0
+            </div>
+          </div>
+          <div class="player">
+            <div class="player__name">
+              Player 5
+            </div>
+            <div class="player__score">
+              0
+            </div>
+          </div>
+          <div class="player">
+            <div class="player__name">
+              Player 6
+            </div>
+            <div class="player__score">
+              0
+            </div>
+          </div>
+          <div class="player">
+            <div class="player__name">
+              Player 7
+            </div>
+            <div class="player__score">
+              0
+            </div>
+          </div>
+          <div class="player">
+            <div class="player__name">
+              Player 8
+            </div>
+            <div class="player__score">
+              0
+            </div>
+          </div>
+          <div class="player">
+            <div class="player__name">
+              Player 9
+            </div>
+            <div class="player__score">
+              0
+            </div>
+          </div>
+          <div class="player">
+            <div class="player__name">
+              Player 10
+            </div>
+            <div class="player__score">
+              0
+            </div>
+          </div>
+          <div class="player">
+            <div class="player__name">
+              Player 11
+            </div>
+            <div class="player__score">
+              0
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="board-events">
+    <div class="board-event">
+      <div class="board-event__title">⚽ Goal</div>
+      <div class="board-event__description">Player 1</div>
+    </div>
+    <div class="board-event">
+      <div class="board-event__title">⚽ Goal</div>
+      <div class="board-event__description">Player 2</div>
+    </div>
+    <div class="board-event">
+      <div class="board-event__title">⚽ Goal</div>
+      <div class="board-event__description">Player 2</div>
+    </div>
+    <div class="board-event">
+      <div class="board-event__title">🟥 Red Card</div>
+      <div class="board-event__description">Player 2</div>
+    </div>
+    <div class="board-event">
+      <div class="board-event__title">🟨 Yellow Card</div>
+      <div class="board-event__description">Player 3</div>
+    </div>
+    <div class="board-event">
+      <div class="board-event__title">🟨 Yellow Card</div>
+      <div class="board-event__description">Player 3</div>
+    </div>
+    <div class="board-event">
+      <div class="board-event__title">🔄 Substitution</div>
+      <div class="board-event__description">Player 4</div>
+    </div>
+    <div class="board-event">
+      <div class="board-event__title">🔄 Substitution</div>
+      <div class="board-event__description">Player 5</div>
+    </div>
+    <div class="board-event">
+      <div class="board-event__title">🔄 Substitution</div>
+      <div class="board-event__description">Player 4</div>
+    </div>
+    <div class="board-event">
+      <div class="board-event__title">🔄 Substitution</div>
+      <div class="board-event__description">Player 5</div>
+    </div>
+    <div class="board-event">
+      <div class="board-event__title">🔄 Substitution</div>
+      <div class="board-event__description">Player 6</div>
+    </div>
+    <div class="board-event">
+      <div class="board-event__title">🔄 Substitution</div>
+      <div class="board-event__description">Player 7</div>
+    </div>
+    <div class="board-event">
+      <div class="board-event__title">🔄 Substitution</div>
+      <div class="board-event__description">Player 8</div>
+    </div>
+    <div class="board-event">
+      <div class="board-event__title">🔄 Substitution</div>
+      <div class="board-event__description">Player 9</div>
+    </div>
+    <div class="board-event">
+      <div class="board-event__title">🔄 Substitution</div>
+      <div class="board-event__description">Player 10</div>
+    </div>
+    <div class="board-event">
+      <div class="board-event__title">🔄 Substitution</div>
+      <div class="board-event__description">Player 11</div>
+    </div>
+  </div>
+</div>

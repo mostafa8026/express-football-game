@@ -2,15 +2,35 @@
 <html>
 
 <head>
-  <!-- retriving the title from backend -->
   <title>
     <%= title %>
   </title>
+  <!--load from assets/styles.css-->
+  <link rel="stylesheet" href="/styles.css">
 </head>
 
 <body>
-  <h1>Home</h1>
-  <p>Welcome to the home page!</p>
+  <!-- Header -->
+  <header class="header">
+    <%- include('header') %>
+  </header>
+
+  <!-- Container -->
+  <div id="content" class="container">
+    <% if (body) { %>
+      <%- include(body) %>
+        <% } else { %>
+          <h1>Welcome to the fantastic football game!</h1>
+          <p>Click <a href="/game">here</a> to start the game!</p>
+          <% } %>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <%- include('footer') %>
+  </footer>
+
+  <!-- Add your JavaScript and other footer elements here -->
 </body>
 
 </html>
