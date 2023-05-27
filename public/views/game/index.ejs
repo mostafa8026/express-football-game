@@ -143,6 +143,47 @@
   }
 </style>
 
+<script type="text/javascript">
+  // fetch events every 5 seconds from /events/all
+  // and update the board
+  function updateBoard() {
+    fetch('/events/all')
+      .then(res => res.json())
+      .then(events => {
+        console.log(events);
+        const boardEvents = document.querySelector('.board-events');
+        // clear all events
+        boardEvents.innerHTML = '';
+        // add new events
+        events.forEach(event => {
+          const eventDiv = document.createElement('div');
+          eventDiv.classList.add('board-event');
+          const titleDiv = document.createElement('div');
+          titleDiv.classList.add('board-event__title');
+          titleDiv.innerText = event.name;
+          const descriptionDiv = document.createElement('div');
+          descriptionDiv.classList.add('board-event__description');
+          descriptionDiv.innerText = event.description;
+          eventDiv.appendChild(titleDiv);
+          eventDiv.appendChild(descriptionDiv);
+          boardEvents.appendChild(eventDiv);
+        });
+        // scroll to the bottom
+        scrollToBottom();
+      });
+  }
+
+  updateBoard();
+  // update board every 5 seconds
+  setInterval(updateBoard, 5000);
+
+  // scroll to the bottom
+  function scrollToBottom() {
+    const boardEvents = document.querySelector('.board-events');
+    boardEvents.scrollTop = boardEvents.scrollHeight;
+  }
+</script>
+
 <div class="game-board-container">
   <div class="game-page">
     <h2>Football Game</h2>

@@ -2,7 +2,10 @@ import connectLivereload from 'connect-livereload';
 import dotenv from 'dotenv';
 import express from 'express';
 import livereload from 'livereload';
-import gameController from './controllers/game/game.controller';
+import { EventController } from './modules/events/event.controller';
+import { EventEntity } from './modules/events/event.entity';
+import { EventService } from './modules/events/event.service';
+import gameController from './modules/game/game.controller';
 
 dotenv.config();
 
@@ -36,8 +39,13 @@ app.get('/', (_, res) => {
 });
 
 app.use('/game', gameController);
+const eventController = new EventController();
+const eventService = new EventService();
+eventService.eventEntity = new EventEntity();
+eventController.eventService = eventService;
+eventController.initRouter(app, '/events');
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
-  console.log('Server listening on port 3000');
+  console.log(`Server listening on http://localhost:${port}`);
 });
